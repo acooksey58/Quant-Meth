@@ -1,0 +1,518 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={in class\_assign3},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{in class\_assign3}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+SUCCESS OF LEADER ASSASSINATION AS A NATURAL EXPERIMENT
+
+One longstanding debate in the study of international relations concerns
+the question of whether individual political leaders can make a
+difference. Some emphasize that leaders with different ideologies and
+personalities can significantly affect the course of a nation. Others
+argue that political leaders are severely constrained by historical and
+institutional forces. Did individuals like Hitler, Mao, Roosevelt, and
+Churchill make a big difference? The difficulty of empirically testing
+these arguments stems from the fact that the change of leadership is not
+random and there are many confounding factors to be adjusted for. In
+this exercise, we consider a natural experiment in which the success or
+failure of assassination attempts is assumed to be essentially random.7
+Each observation of the CSV data set leaders.csv contains information
+about an assassination attempt. Table 2.8 presents the names and
+descriptions of variables in this leader assassination data set. The
+polity variable represents the so-called polity score from the Polity
+Project. The Polity Project systematically documents and quantifies the
+regime types of all countries in the world from 1800. The polity score
+is a 21-point scale ranging from −10 (hereditary monarchy) to 10
+(consolidated democracy). The result variable is a 10-category factor
+variable describing the result of each assassination attempt.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  How many assassination attempts are recorded in the data? How many
+  countries experience at least one leader assassination attempt? (The
+  unique() function, What is the average number of such attempts (per
+  year) among these countries?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{leaders <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"leaders.csv"}\NormalTok{)}
+\KeywordTok{dim}\NormalTok{(leaders)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 250  11
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(leaders}\OperatorTok{$}\NormalTok{result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Length     Class      Mode 
+##       250 character character
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\StringTok{"there were 250 assissination attempts"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "there were 250 assissination attempts"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{unique}\NormalTok{(leaders}\OperatorTok{$}\NormalTok{country)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Afghanistan"       "Albania"           "Algeria"          
+##  [4] "Argentina"         "Australia"         "Austria"          
+##  [7] "Belgium"           "Bhutan"            "Bolivia"          
+## [10] "Brazil"            "Burundi"           "Bulgaria"         
+## [13] "Cambodia"          "Canada"            "Ivory Coast"      
+## [16] "Chad"              "Chile"             "China"            
+## [19] "Colombia"          "Congo Brazzaville" "Costa Rica"       
+## [22] "Cuba"              "Cyprus"            "Czechoslovakia"   
+## [25] "Dominican Rep"     "Congo Kinshasa"    "Ecuador"          
+## [28] "Egypt"             "Ethiopia"          "France"           
+## [31] "Ghana"             "Germany"           "Greece"           
+## [34] "Georgia"           "Guatemala"         "Guinea"           
+## [37] "Haiti"             "Honduras"          "India"            
+## [40] "Indonesia"         "Iran"              "Iraq"             
+## [43] "Israel"            "Italy"             "Jordan"           
+## [46] "Japan"             "Kenya"             "Kuwait"           
+## [49] "Liberia"           "Lebanon"           "Libya"            
+## [52] "Madagascar"        "Mexico"            "Myanmar (Burma)"  
+## [55] "Nepal"             "Nicaragua"         "Niger"            
+## [58] "Netherlands"       "Oman"              "Pakistan"         
+## [61] "Panama"            "Peru"              "Poland"           
+## [64] "Portugal"          "Korea South"       "Russia"           
+## [67] "Vietnam South"     "Rwanda"            "South Africa"     
+## [70] "El Salvador"       "Saudi Arabia"      "Senegal"          
+## [73] "Somalia"           "Spain"             "Sri Lanka"        
+## [76] "Sudan"             "Sweden"            "Syria"            
+## [79] "Togo"              "Turkey"            "Uganda"           
+## [82] "United Kingdom"    "Uruguay"           "United States"    
+## [85] "Uzbekistan"        "Venezuela"         "Yemen North"      
+## [88] "Yugoslavia"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\StringTok{"there are 88 countries who experienced assissination attempts"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "there are 88 countries who experienced assissination attempts"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(}\KeywordTok{tapply}\NormalTok{(leaders}\OperatorTok{$}\NormalTok{country, leaders}\OperatorTok{$}\NormalTok{year, length))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.45098
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\StringTok{"there are 2.45 attempts per year "}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "there are 2.45 attempts per year "
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Create a new binary variable named success that is equal to 1 if a
+  leader dies from the attack and 0 if the leader survives. Store this
+  new variable as part of the original data frame. What is the overall
+  success rate of leader assassination? Does the result speak to the
+  validity of the assumption that the success of assassination attempts
+  is randomly determined?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(leaders}\OperatorTok{$}\NormalTok{result)}
+\KeywordTok{levels}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "dies between a day and a week"              
+##  [2] "dies between a week and a month"            
+##  [3] "dies within a day after the attack"         
+##  [4] "dies, timing unknown"                       
+##  [5] "hospitalization but no permanent disability"
+##  [6] "not wounded"                                
+##  [7] "plot stopped"                               
+##  [8] "survives but wounded severely"              
+##  [9] "survives, whether wounded unknown"          
+## [10] "wounded lightly"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\StringTok{"levels 1-4 are dead. 5-10 are not dead."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "levels 1-4 are dead. 5-10 are not dead."
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{leaders}\OperatorTok{$}\NormalTok{success[leaders}\OperatorTok{$}\NormalTok{result }\OperatorTok{==}\StringTok{ "dies between a day and a week"} 
+               \OperatorTok{|}\StringTok{ }\NormalTok{leaders}\OperatorTok{$}\NormalTok{result }\OperatorTok{==}\StringTok{ "dies between a week and a month"} 
+               \OperatorTok{|}\StringTok{ }\NormalTok{leaders}\OperatorTok{$}\NormalTok{result }\OperatorTok{==}\StringTok{ "dies within a day after the attack"}
+               \OperatorTok{|}\StringTok{ }\NormalTok{leaders}\OperatorTok{$}\NormalTok{result }\OperatorTok{==}\StringTok{ "dies, timing unknown"}
+\NormalTok{               ] <-}\StringTok{ }\DecValTok{1}
+
+
+\NormalTok{leaders}\OperatorTok{$}\NormalTok{success[leaders}\OperatorTok{$}\NormalTok{result }\OperatorTok{==}\StringTok{ "hospitalization but no permanent disability"} 
+               \OperatorTok{|}\StringTok{ }\NormalTok{leaders}\OperatorTok{$}\NormalTok{result }\OperatorTok{==}\StringTok{ "not wounded"}
+               \OperatorTok{|}\StringTok{ }\NormalTok{leaders}\OperatorTok{$}\NormalTok{result }\OperatorTok{==}\StringTok{ "plot stopped"}
+               \OperatorTok{|}\StringTok{ }\NormalTok{leaders}\OperatorTok{$}\NormalTok{result }\OperatorTok{==}\StringTok{ "survives but wounded severely"}
+               \OperatorTok{|}\StringTok{ }\NormalTok{leaders}\OperatorTok{$}\NormalTok{result }\OperatorTok{==}\StringTok{ "survives, whether wounded unknown"}
+               \OperatorTok{|}\StringTok{ }\NormalTok{leaders}\OperatorTok{$}\NormalTok{result }\OperatorTok{==}\StringTok{ "wounded lightly"}
+\NormalTok{               ] <-}\StringTok{ }\DecValTok{0}
+\KeywordTok{mean}\NormalTok{(leaders}\OperatorTok{$}\NormalTok{success)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.216
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\StringTok{"there is a 21.6% success rate"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "there is a 21.6% success rate"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\StringTok{"the success rate seems to not be random. Meaning that it is not valid assumption"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "the success rate seems to not be random. Meaning that it is not valid assumption"
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Investigate whether the average polity score over three years prior to
+  an assassination attempt differs on average between successful and
+  failed attempts. Also, examine whether there is any difference in the
+  age of targeted leaders between successful and failed attempts.
+  Briefly interpret the results in light of the validity of the
+  aforementioned assumption.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tapply}\NormalTok{(leaders}\OperatorTok{$}\NormalTok{politybefore, leaders}\OperatorTok{$}\NormalTok{success, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          0          1 
+## -1.7431973 -0.7037037
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\StringTok{"The difference is 1.04 which does not appear trivial"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "The difference is 1.04 which does not appear trivial"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tapply}\NormalTok{(leaders}\OperatorTok{$}\NormalTok{age, leaders}\OperatorTok{$}\NormalTok{success, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        0        1 
+## 52.71429 56.46296
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\StringTok{"successful aimed leaders is 3 years higher"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "successful aimed leaders is 3 years higher"
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Repeat the same analysis as in the previous question, but this time
+  using the country's experience of civil and international war. Create
+  a new binary variable in the data frame called warbefore. Code the
+  variable such that it is equal to 1 if a country is in either civil or
+  international war during the three years prior to an assassination
+  attempt. Provide a brief interpretation of the result.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{leaders}\OperatorTok{$}\NormalTok{warbefore[leaders}\OperatorTok{$}\NormalTok{civilwarbefore }\OperatorTok{==}\StringTok{ }\DecValTok{1}
+                       \OperatorTok{|}\StringTok{ }\NormalTok{leaders}\OperatorTok{$}\NormalTok{interwarbefore }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{] <-}\StringTok{ }\DecValTok{1} 
+
+\NormalTok{leaders}\OperatorTok{$}\NormalTok{warbefore[leaders}\OperatorTok{$}\NormalTok{civilwarbefore }\OperatorTok{!=}\StringTok{ }\DecValTok{1} \OperatorTok{&}\StringTok{ }\NormalTok{leaders}\OperatorTok{$}\NormalTok{interwarbefore }\OperatorTok{!=}\StringTok{ }\DecValTok{1}\NormalTok{] <-}\StringTok{ }\DecValTok{0} 
+
+\KeywordTok{summary}\NormalTok{(leaders}\OperatorTok{$}\NormalTok{warbefore)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   0.000   0.000   0.368   1.000   1.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{war3 <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(leaders, leaders}\OperatorTok{$}\NormalTok{warbefore }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+
+\KeywordTok{tapply}\NormalTok{(war3}\OperatorTok{$}\NormalTok{politybefore, war3}\OperatorTok{$}\NormalTok{success, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          0          1 
+## -1.7534247 -0.1929825
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tapply}\NormalTok{(war3}\OperatorTok{$}\NormalTok{age, war3}\OperatorTok{$}\NormalTok{success, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        0        1 
+## 53.13699 57.26316
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\StringTok{"countries that experience war have a higher polity"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "countries that experience war have a higher polity"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\StringTok{"age of ploted leaders is higher among successes"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "age of ploted leaders is higher among successes"
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Does successful leader assassination cause democratization? Does
+  successful leader assassination lead countries to war? When analyzing
+  these data, be sure to state your assumptions and provide a brief
+  interpretation of the results.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{leaders}\OperatorTok{$}\NormalTok{warafter[leaders}\OperatorTok{$}\NormalTok{civilwarafter }\OperatorTok{==}\StringTok{ }\DecValTok{1}
+                 \OperatorTok{|}\StringTok{ }\NormalTok{leaders}\OperatorTok{$}\NormalTok{interwarafter }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{] <-}\StringTok{ }\DecValTok{1}
+
+\NormalTok{leaders}\OperatorTok{$}\NormalTok{warafter[leaders}\OperatorTok{$}\NormalTok{civilwarafter }\OperatorTok{!=}\StringTok{ }\DecValTok{1} \OperatorTok{&}\StringTok{ }\NormalTok{leaders}\OperatorTok{$}\NormalTok{interwarafter }\OperatorTok{!=}\StringTok{ }\DecValTok{1}\NormalTok{] <-}\StringTok{ }\DecValTok{0} 
+
+\NormalTok{war3b <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(leaders, }\DataTypeTok{subset =}\NormalTok{ (warafter }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{))}
+
+\KeywordTok{tapply}\NormalTok{(leaders}\OperatorTok{$}\NormalTok{warafter, leaders}\OperatorTok{$}\NormalTok{success, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         0         1 
+## 0.2959184 0.2037037
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tapply}\NormalTok{(leaders}\OperatorTok{$}\NormalTok{polityafter, leaders}\OperatorTok{$}\NormalTok{success, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          0          1 
+## -1.8945578 -0.7623457
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\StringTok{"After assassin success war breaking out is 20%"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "After assassin success war breaking out is 20%"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\StringTok{"While its rate after failure is 30%"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "While its rate after failure is 30%"
+\end{verbatim}
+
+\end{document}
