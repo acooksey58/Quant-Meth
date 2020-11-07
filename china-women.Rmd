@@ -78,8 +78,14 @@ tea <- est.conf(women.after$sex[women.after$teadum == 1],
 orch <- est.conf(women.after$sex[women.after$orchdum == 1], 
                  conf.level = 0.05)
 
-
-
+conf.level <- 0.05
+est.diff <- tea[1] - orch[1]
+se.diff <- sqrt(tea[2]^2 / tea[5] + orch[2]^2 / orch[5])
+cis.diff <- c(est.diff - qnorm(1 - conf.level / 2) * se.diff, 
+              est.diff + qnorm(1 - conf.level / 2) * se.diff)
+results <- c(est.diff, se.diff, cis.diff)
+names(results) <- c("diff", "se", "lower.ci", "upper.ci")
+results
 ```
   
 ## Question 2
@@ -91,7 +97,31 @@ Repeat the analysis in the previous question for subsequent
   plot.
   
 ```{r}
-
+par(cex = 1.5) 
+years <- unique(women$biryr[women$biryr > 1980])
+diff <- matrix(data = NA, nrow = length(years), ncol = 5)
+rownames(diff) <- years
+colnames(diff) <- c("est", "se", "lower.ci", "upper.ci", "n.obs")
+for(i in 1:length(years)){
+  tea <- est.conf(women$sex[women$teadum == 1 & women$biryr == years[i]], 
+                  conf.level = 0.05)
+  orch <- est.conf(women$sex[women$orchdum == 1 & women$biryr == years[i]], 
+                   conf.level = 0.05)
+  conf.level <- 0.05
+  est.diff <- tea[1] - orch[1]
+  se.diff <- sqrt(tea[2]^2/tea[5] + orch[2]^2 / orch[5])
+  cis.diff <- c(est.diff - qnorm(1 - conf.level/2) * se.diff, 
+                est.diff + qnorm(1 - conf.level/2) * se.diff)
+  diff[i, ] <- c(est.diff, se.diff, cis.diff, tea[5] + orch[5])
+}
+plot(years, diff[, "est"], type = "l",
+     xlab = "Year", ylab = "Difference in Sex Ratio",
+     ylim = c(min(diff[, "lower.ci"]) - 4 * sd(diff[, "lower.ci"]), 
+              max(diff[, "upper.ci"]) + 4 * sd(diff[, "upper.ci"])), 
+     main = "Post-Reform Sex Ratio Difference")
+lines(years, diff[, "lower.ci"], lty = 2, col = "red")
+lines(years, diff[, "upper.ci"], lty = 2, col = "red")
+abline(h = 0, lty = 3)
 ```
 
   
@@ -105,7 +135,33 @@ Next, we compare tea-producing and orchard-producing regions
   imply about the interpretation of the results given in Question~1?
   
 ```{r}
+women.before <- women[women$biryr == 1978, ]
+han.tea <- est.conf(women.before$han[women.before$teadum == 1], 
+                    conf.level = 0.05)
+sex.tea <- est.conf(women.before$sex[women.before$teadum == 1], 
+                    conf.level = 0.05) 
+han.orch <- est.conf(women.before$han[women.before$orchdum == 1], 
+                     conf.level = 0.05)
+sex.orch <- est.conf(women.before$sex[women.before$orchdum == 1], 
+                     conf.level = 0.05) 
 
+han.diff <- han.tea[1] - han.orch[1]
+han.se <- sqrt(han.tea[1]^2 / han.tea[5] + 
+                   han.orch[1]^2 / han.orch[5])
+han.cis <- c(han.diff - qnorm(1-conf.level / 2) * han.se, 
+             han.diff + qnorm(1-conf.level / 2) * han.se)
+results <- c(han.diff, han.se, han.cis)
+names(results) <- c("mean", "se", "lower.ci", "upper.ci")
+results
+
+sex.diff <- sex.tea[1] - sex.orch[1]
+sex.se <- sqrt(sex.tea[1]^2 / sex.tea[5] + 
+                   sex.orch[1]^2 / sex.orch[5])
+sex.cis <- c(sex.diff - qnorm(1 - conf.level / 2) * sex.se, 
+             sex.diff + qnorm(1 - conf.level / 2) * sex.se)
+results <- c(sex.diff, sex.se, sex.cis)
+names(results) <- c("mean", "se", "lower.ci", "upper.ci")
+results
 ```
   
 ## Question 4
@@ -115,6 +171,39 @@ Repeat the analysis for the sex ratio in the previous question
   a graph which plots the difference-in-means estimates between the
   two regions and their 95\% confidence intervals against years.  Give
   a substantive interpretation of the plot.
+```{r}
+par(cex = 1.5)
+
+years <- unique(women$biryr[women$biryr < 1978])
+results.sex <- matrix(data = NA, ncol = 4, nrow = length(years))
+rownames(results.sex) <- years
+colnames(results.sex) <- c("mean", "se", "lower.ci", "upper.ci")
+for(i in 1:length(years)){
+    women.before <- women[women$biryr == years[i], ]
+    sex.tea <- est.conf(women.before$sex[women.before$teadum == 1], 
+                        conf.level = 0.05)
+    sex.orch <- est.conf(women.before$sex[women.before$orchdum == 1], 
+                         conf.level = 0.05)
+
+    sex.diff <- sex.tea[1] - sex.orch[1]
+    sex.se <- sqrt(sex.tea[1]^2 / sex.tea[5] + 
+                       sex.orch[1]^2 / sex.orch[5])
+    sex.cis <- c(sex.diff - qnorm(1 - conf.level / 2) * sex.se, 
+                 sex.diff + qnorm(1 - conf.level / 2) * sex.se)
+    results.sex[i, ] <- c(sex.diff, sex.se, sex.cis)
+}
+
+plot(years, results.sex[, "mean"], type = "l",
+     xlab = "Year", ylab = "Difference in Sex Ratio",
+     ylim = c(min(results.sex[, "lower.ci"]) - 
+                  4 * sd(results.sex[, "lower.ci"]), 
+              max(results.sex[, "upper.ci"]) + 
+                  4 * sd(results.sex[, "upper.ci"])), 
+     main = "Pre-Reform Sex Ratio Difference")
+lines(years, results.sex[, "lower.ci"], lty = 2, col = "red")
+lines(years, results.sex[, "upper.ci"], lty = 2, col = "red")
+abline(h = 0, lty = 3)
+```
 
 ## Question 5
 
@@ -153,3 +242,41 @@ We will adopt the difference-in-differences design by comparing
   substantive assumptions does the difference-in-differences design
   require?  Give a substantive interpretation of the results.
 
+```{r}
+counties.before <- unique(women$admin[women$biryr == 1978])
+counties.after <- unique(women$admin[women$biryr == 1980])
+counties.list <- intersect(counties.before, counties.after)
+women.before <- women[women$teadum == 1 & women$biryr == 1978 & 
+                          women$admin %in% counties.list, ]
+women.after <- women[women$teadum == 1 & women$biryr == 1980 & 
+                         women$admin %in% counties.list, ]
+tea.before <- est.conf(women.before$sex, conf.level = 0.95)
+tea.after <- est.conf(women.after$sex, conf.level = 0.95)
+covar.tea <- cov(women.before$sex,  women.after$sex, 
+                 use = "pairwise.complete.obs")
+
+est.tea <- tea.after[1] - tea.before[1]
+var.tea <- (tea.after[2]^2 + tea.before[2]^2 - 2*covar.tea) / 
+    (tea.before[5] + tea.after[5])
+
+women.before <- women[women$orchdum == 1 & women$biryr == 1978 & 
+                          women$admin %in% counties.list, ]
+women.after <- women[women$orchdum == 1 & women$biryr == 1980 & 
+                         women$admin %in% counties.list, ]
+orch.before <- est.conf(women.before$sex, conf.level = 0.95)
+orch.after <- est.conf(women.after$sex, conf.level = 0.95)
+covar.orch <- cov(women.before$sex,  women.after$sex, 
+                 use = "pairwise.complete.obs")
+
+est.orch <- orch.after[1] - orch.before[1]
+var.orch <- (orch.after[2]^2 + orch.before[2]^2 - 2*covar.orch) / 
+    (orch.before[5] + orch.after[5])
+
+est.did <- est.tea - est.orch
+se.did <- sqrt(var.tea + var.orch)
+cis.did <- c(est.did - qnorm(1 - conf.level/2) * se.did, 
+             est.did + qnorm(1 - conf.level/2) * se.did)
+results <- c(est.did, se.did, cis.did)
+names(results) <- c("diff-in-diff", "se", "lower.ci", "upper.ci")
+results
+```
