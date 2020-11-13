@@ -104,7 +104,16 @@ We next examine if there exists any difference in the
 filedrawer$published <- ifelse(filedrawer$DV == "Published, top" | filedrawer$DV == "Published, non top", 1, 0)
 
 pub.strong <- sum(filedrawer$pub.2[filedrawer$IV == "Strong"])
+pub1.strong <- length(filedrawer$pub.2[filedrawer$IV == "Strong"])
 
+pub.weak <- sum(filedrawer$pub.2[filedrawer$IV == "Weak"])
+pub1.weak <- length(filedrawer$pub.2[filedrawer$IV == "Weak"])
+
+pub.null <- sum(filedrawer$pub.2[filedrawer$IV == "Null"])
+pub1.null <- length(filedrawer$pub.2[filedrawer$IV == "Null"])
+
+prop.test(c(pub.strong, pub.null), c(pub1.strong, pub1.null))
+prop.test(c(pub.strong, pub.weak), c(pub1.strong, pub1.weak))
 ```
   
 ## Question 3
@@ -114,6 +123,28 @@ Using Monte Carlo simulations, derive the distribution of the
   of the two comparisons you made in the previous question. Do you
   attain similar p-values (for a two-tailed test) to those obtained in
   the previous question?
+```{r}
+sims <- 5000
+z.1 <- z.2 <- rep(NA, sims)
+for (i in 1:sims) {
+    IV.2  <- sample(filedrawer$IV,  replace = FALSE)
+    mean.strong.s <- mean(filedrawer$pub.2[IV.2 == "Strong"])
+    mean.weak.s <- mean(filedrawer$pub.2[IV.2 == "Weak"])
+    mean.null.s <- mean(filedrawer$pub.2[IV.2 == "Null"])
+    z.1[i] <- mean.strong.s - mean.null.s
+    z.2[i] <- mean.strong.s - mean.weak.s 
+}
+
+mean.strong <- mean(filedrawer$pub.2[filedrawer$IV == "Strong"])
+mean.weak <- mean(filedrawer$pub.2[filedrawer$IV  == "Weak"])
+mean.null <- mean(filedrawer$pub.2[filedrawer$IV  == "Null"])
+z.1.obs <- mean.strong - mean.null
+z.2.obs <- mean.strong - mean.weak
+
+pvalue.1 <- mean(abs(z.1)  >=  z.1.obs)
+pvalue.2 <- mean(abs(z.2)  >=  z.2.obs)
+c(pvalue.1, pvalue.2)
+```
   
 ## Question 4
 
